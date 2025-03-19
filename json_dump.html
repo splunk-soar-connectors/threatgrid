@@ -1,5 +1,5 @@
 <!-- File: json_dump.html
-Copyright (c) 2016-2024 Splunk Inc.
+Copyright (c) 2016-2025 Splunk Inc.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -15,24 +15,23 @@ without a valid written license from Splunk Inc. is PROHIBITED.
 -->
 {% extends 'widgets/widget_template.html' %}
 {% load custom_template %}
-
-{% block custom_title_prop %}{% if title_logo %}style="background-size: auto 60%; background-position: 50%; background-repeat: no-repeat; background-image: url('/app_resource/{{ title_logo }}');"{% endif %}{% endblock %}
+{% block custom_title_prop %}
+  {% if title_logo %}
+    style="background-size: auto 60%; background-position: 50%; background-repeat: no-repeat; background-image: url('/app_resource/{{ title_logo }}');"
+  {% endif %}
+{% endblock %}
 {% block title1 %}{{ title1 }}{% endblock %}
 {% block title2 %}{{ title2 }}{% endblock %}
-{% block custom_tools %}
-{% endblock %}
+{% block custom_tools %}{% endblock %}
 {% block widget_content %}
-
-
-<div style="overflow: auto; width: 100%; height: 100%;">
-  {% for item in json %}
-  <br>
-  <div class="root" style="display:none" id="threatgrid_jsonview">{{ item }}</div>
-  <div class="result"></div>
-  {% endfor %}
-</div>
-
-<script>
+  <div style="overflow: auto; width: 100%; height: 100%;">
+    {% for item in json %}
+      <br>
+      <div class="root" style="display:none" id="threatgrid_jsonview">{{ item }}</div>
+      <div class="result"></div>
+    {% endfor %}
+  </div>
+  <script>
   /******/ (function(modules) { // webpackBootstrap
   /******/ 	// The module cache
   /******/ 	var installedModules = {};
@@ -535,5 +534,5 @@ without a valid written license from Splunk Inc. is PROHIBITED.
 
   /***/ })
   /******/ ]);
-</script>
+  </script>
 {% endblock %}

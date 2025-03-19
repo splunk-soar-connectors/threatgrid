@@ -1,5 +1,5 @@
 <!-- File: info.html
-Copyright (c) 2016-2024 Splunk Inc.
+Copyright (c) 2016-2025 Splunk Inc.
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -15,16 +15,16 @@ without a valid written license from Splunk Inc. is PROHIBITED.
 -->
 {% extends 'widgets/widget_template.html' %}
 {% load custom_template %}
-
-{% block custom_title_prop %}{% if title_logo %}style="background-size: auto 60%; background-position: 50%; background-repeat: no-repeat; background-image: url('/app_resource/{{ title_logo }}');"{% endif %}{% endblock %}
+{% block custom_title_prop %}
+  {% if title_logo %}
+    style="background-size: auto 60%; background-position: 50%; background-repeat: no-repeat; background-image: url('/app_resource/{{ title_logo }}');"
+  {% endif %}
+{% endblock %}
 {% block title1 %}{{ title1 }}{% endblock %}
 {% block title2 %}{{ title2 }}{% endblock %}
-{% block custom_tools %}
-{% endblock %}
+{% block custom_tools %}{% endblock %}
 {% block widget_content %}
-
-
-<style>
+  <style>
   .threatgrid-info h3 {
   }
   .sandbox-info {
@@ -71,151 +71,158 @@ without a valid written license from Splunk Inc. is PROHIBITED.
     display: none !important;
   }
 
-</style>
-<div class="threatgrid-info" id="threatgrid-info" style="overflow: auto; width: 100%; height: 100%; padding-left:10px; padding-right:10px">
-  {% if not data or data|length == 0 %}
+  </style>
+  <div class="threatgrid-info"
+       id="threatgrid-info"
+       style="overflow: auto;
+              width: 100%;
+              height: 100%;
+              padding-left:10px;
+              padding-right:10px">
+    {% if not data or data|length == 0 %}
       <h4 class="wf-h4-style">No data found</h4>
-  {% else %}
-  {% for item in data %}
-    <h3>Cisco Secure Malware Analysis</h3>
-
-    <h3>Info</h3>
-    <table class="wf-table-vertical">
-      {% if item.threat or item.report or item.status %}
-
-        {% if item.status%}
-          <tr>
-            <td>ID &nbsp; &nbsp;</td>
-            <td>
-                <a href="javascript:;" onclick="context_menu(this, [{'contains': ['md5', 'threatgrid task id'], 'value':'{{ item.status.id }}' }], 0, {{ container.id }}, null, false);">
-                {{ item.status.id }}
-                &nbsp;
-                <span class="fa fa-caret-down" style="font-size: smaller;"></span>
-              </a>
-            </td>
-          </tr>
-          <tr>
-              <td>Filename &nbsp; &nbsp;</td>
-              <td>{{ item.status.filename }}</td>
-          </tr>
-          <tr>
-              <td>State &nbsp; &nbsp;</td>
-              <td>{{ item.status.state }}</td>
-          </tr>
-          <tr>
-              <td>Status &nbsp; &nbsp;</td>
-              <td>{{ item.status.status }}</td>
-          </tr>
-          <tr>
-              <td>Started On &nbsp; &nbsp;</td>
-              <td>{{ item.status.started_at|human_datetime }}</td>
-          </tr>
-          <tr>
-              <td>Ended &nbsp; &nbsp;</td>
-              <td>{{ item.status.completed_at|human_datetime }}</td>
-          </tr>
-          <tr>
-              <td>SHA256 &nbsp; &nbsp;</td>
-              <td>{{ item.status.sha256 }}</td>
-          </tr>
-        {% endif %}
-
-        <tr>
-            <td>Target &nbsp; &nbsp;</td>
-            <td>
-                <a href="javascript:;" onclick="context_menu(this, [{'contains': ['file name'], 'value':'{{ item.target }}' }], 0, {{ container.id }}, null, false);">
-                {{ item.target }}
-                &nbsp;
-                <span class="fa fa-caret-down" style="font-size: smaller;"></span>
-              </a>
-            </td>
-        </tr>
-
-        {% if item.threat%}
-          <tr>
-              <td>Score &nbsp; &nbsp;</td>
-              <td>{{ item.threat.score }}</td>
-          </tr>
-          <tr>
-              <td>Max Severity &nbsp; &nbsp;</td>
-              <td>{{ item.threat|by_key:'max-severity' }}</td>
-          </tr>
-          <tr>
-              <td>Max Confidence &nbsp; &nbsp;</td>
-              <td>{{ item.threat|by_key:'max-confidence' }}</td>
-          </tr>
-        {% endif %}
-
-        {% if item.report%}
-          <tr>
-              <td>Type &nbsp; &nbsp;</td>
-              <td>{{ item.report.metadata.malware_desc.0.magic }} ({{ item.report.metadata.malware_desc.0.type }})</td>
-          </tr>
-          <tr>
-              <td>Size &nbsp; &nbsp;</td>
-              <td>{{ item.report.metadata.malware_desc.0.size }}</td>
-          </tr>
-          <tr>
-              <td>VM OS &nbsp; &nbsp;</td>
-              <td>{{ item.report.metadata.sandcastle_env.current_os }}</td>
-          </tr>
-        {% endif %}
-
-        <tr>
-            <td>Source Link &nbsp; &nbsp;</td>
-            <td><a href="{{ item.results_url }}" target="_blank">Task {{ item.status.id }}</a></td>
-        </tr>
-
-      {% else %}
-        <tr>
-          <td colspan="2">No data found</td>
-        </tr>
-      {% endif %}
-    </table>
-
-    <h3>Behaviors</h3>
-    <table class="phantom-table" id="threatgrid-iocs" style="min-width: 100%; margin: 0px;">
-      <thead>
-        <th>NAME</th>
-        <th>SEVERITY</th>
-        <th>CONFIDENCE</th>
-        <th>TAGS</th>
-        <th>CATEGORIES</th>
-        <th></th>
-      </thead>
-      <tbody>
-        {% if not item.report %}
-          <tr>
-            <td colspan="6">No data found</td>
-          </tr>
-        {% else %}
-          {% for ioc in item.report.iocs|dictsort:'title' %}
+    {% else %}
+      {% for item in data %}
+        <h3>Cisco Secure Malware Analysis</h3>
+        <h3>Info</h3>
+        <table class="wf-table-vertical">
+          {% if item.threat or item.report or item.status %}
+            {% if item.status %}
+              <tr>
+                <td>ID &nbsp; &nbsp;</td>
+                <td>
+                  <a href="javascript:;"
+                     onclick="context_menu(this, [{'contains': ['md5', 'threatgrid task id'], 'value':'{{ item.status.id }}' }], 0, {{ container.id }}, null, false);">
+                    {{ item.status.id }}
+                    &nbsp;
+                    <span class="fa fa-caret-down" style="font-size: smaller;"></span>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Filename &nbsp; &nbsp;</td>
+                <td>{{ item.status.filename }}</td>
+              </tr>
+              <tr>
+                <td>State &nbsp; &nbsp;</td>
+                <td>{{ item.status.state }}</td>
+              </tr>
+              <tr>
+                <td>Status &nbsp; &nbsp;</td>
+                <td>{{ item.status.status }}</td>
+              </tr>
+              <tr>
+                <td>Started On &nbsp; &nbsp;</td>
+                <td>{{ item.status.started_at|human_datetime }}</td>
+              </tr>
+              <tr>
+                <td>Ended &nbsp; &nbsp;</td>
+                <td>{{ item.status.completed_at|human_datetime }}</td>
+              </tr>
+              <tr>
+                <td>SHA256 &nbsp; &nbsp;</td>
+                <td>{{ item.status.sha256 }}</td>
+              </tr>
+            {% endif %}
             <tr>
-              <td>{{ ioc.title }}</td>
-              <td>{{ ioc.severity }}</td>
-              <td>{{ ioc.confidence }}</td>
-              <td>{{ ioc.tags|join:', ' }}</td>
-              <td>{{ ioc.category|join:', ' }}</td>
+              <td>Target &nbsp; &nbsp;</td>
               <td>
-                <div>
-                  {% for data in ioc.data %}
-                    {% if data.Antivirus_Result %}
-                      <div>{% if data.Antivirus_Product %}Scanner: {{ data.Antivirus_Product }}&nbsp; - &nbsp;{% endif %}Signature: {{ data.Antivirus_Result }}</div>
-                    {% endif %}
-                  {% endfor %}
-                  {{ ioc.description }}
-                </div>
+                <a href="javascript:;"
+                   onclick="context_menu(this, [{'contains': ['file name'], 'value':'{{ item.target }}' }], 0, {{ container.id }}, null, false);">
+                  {{ item.target }}
+                  &nbsp;
+                  <span class="fa fa-caret-down" style="font-size: smaller;"></span>
+                </a>
               </td>
             </tr>
-          {% endfor %}
-        {% endif %}
-      </tbody>
-    </table>
-  {% endfor %}
-  {% endif %}
-</div>
-
-<script>
+            {% if item.threat %}
+              <tr>
+                <td>Score &nbsp; &nbsp;</td>
+                <td>{{ item.threat.score }}</td>
+              </tr>
+              <tr>
+                <td>Max Severity &nbsp; &nbsp;</td>
+                <td>{{ item.threat|by_key:'max-severity' }}</td>
+              </tr>
+              <tr>
+                <td>Max Confidence &nbsp; &nbsp;</td>
+                <td>{{ item.threat|by_key:'max-confidence' }}</td>
+              </tr>
+            {% endif %}
+            {% if item.report %}
+              <tr>
+                <td>Type &nbsp; &nbsp;</td>
+                <td>{{ item.report.metadata.malware_desc.0.magic }} ({{ item.report.metadata.malware_desc.0.type }})</td>
+              </tr>
+              <tr>
+                <td>Size &nbsp; &nbsp;</td>
+                <td>{{ item.report.metadata.malware_desc.0.size }}</td>
+              </tr>
+              <tr>
+                <td>VM OS &nbsp; &nbsp;</td>
+                <td>{{ item.report.metadata.sandcastle_env.current_os }}</td>
+              </tr>
+            {% endif %}
+            <tr>
+              <td>Source Link &nbsp; &nbsp;</td>
+              <td>
+                <a href="{{ item.results_url }}" target="_blank">Task {{ item.status.id }}</a>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="2">No data found</td>
+            </tr>
+          {% endif %}
+        </table>
+        <h3>Behaviors</h3>
+        <table class="phantom-table"
+               id="threatgrid-iocs"
+               style="min-width: 100%;
+                      margin: 0px">
+          <thead>
+            <th>NAME</th>
+            <th>SEVERITY</th>
+            <th>CONFIDENCE</th>
+            <th>TAGS</th>
+            <th>CATEGORIES</th>
+            <th></th>
+          </thead>
+          <tbody>
+            {% if not item.report %}
+              <tr>
+                <td colspan="6">No data found</td>
+              </tr>
+            {% else %}
+              {% for ioc in item.report.iocs|dictsort:'title' %}
+                <tr>
+                  <td>{{ ioc.title }}</td>
+                  <td>{{ ioc.severity }}</td>
+                  <td>{{ ioc.confidence }}</td>
+                  <td>{{ ioc.tags|join:', ' }}</td>
+                  <td>{{ ioc.category|join:', ' }}</td>
+                  <td>
+                    <div>
+                      {% for data in ioc.data %}
+                        {% if data.Antivirus_Result %}
+                          <div>
+                            {% if data.Antivirus_Product %}Scanner: {{ data.Antivirus_Product }}&nbsp; - &nbsp;{% endif %}
+                            Signature: {{ data.Antivirus_Result }}
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                      {{ ioc.description }}
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+      {% endfor %}
+    {% endif %}
+  </div>
+  <script>
   try {
     var tbl = $('#threatgrid-iocs');
     var datatbl = $(tbl).dataTable({
@@ -266,5 +273,5 @@ without a valid written license from Splunk Inc. is PROHIBITED.
     scroll_body.css('height', new_height + 'px');
     $(table)[0].ph_datatable.fnAdjustColumnSizing();
   }
-</script>
+  </script>
 {% endblock %}
