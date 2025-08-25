@@ -1,9 +1,9 @@
 # Cisco Secure Malware Analytics
 
-Publisher: Splunk \
-Connector Version: 2.4.3 \
-Product Vendor: Cisco \
-Product Name: Cisco Secure Malware Analytics \
+Publisher: Splunk <br>
+Connector Version: 2.4.3 <br>
+Product Vendor: Cisco <br>
+Product Name: Cisco Secure Malware Analytics <br>
 Minimum Product Version: 6.2.1
 
 This app supports executing investigative actions to analyze executables and URLs on the Cisco Secure Malware Analytics sandbox
@@ -41,20 +41,20 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 
 ### Supported Actions
 
-[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity. This action logs into the device to check the connection and credentials \
-[detonate file](#action-detonate-file) - Run the file in the Cisco Secure Malware Analytics sandbox and retrieve the analysis results \
-[query finished tasks](#action-query-finished-tasks) - Query to retrieve completed tasks in Cisco Secure Malware Analytics \
-[get report](#action-get-report) - Query for results of an already completed task in Cisco Secure Malware Analytics \
-[detonate url](#action-detonate-url) - Load a URL in the Cisco Secure Malware Analytics sandbox and retrieve the analysis results \
-[list playbooks](#action-list-playbooks) - List the playbooks available in the connected Cisco Secure Malware Analytics environment \
-[list vms](#action-list-vms) - List the VMs available in the connected Cisco Secure Malware Analytics environment \
+[test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity. This action logs into the device to check the connection and credentials <br>
+[detonate file](#action-detonate-file) - Run the file in the Cisco Secure Malware Analytics sandbox and retrieve the analysis results <br>
+[query finished tasks](#action-query-finished-tasks) - Query to retrieve completed tasks in Cisco Secure Malware Analytics <br>
+[get report](#action-get-report) - Query for results of an already completed task in Cisco Secure Malware Analytics <br>
+[detonate url](#action-detonate-url) - Load a URL in the Cisco Secure Malware Analytics sandbox and retrieve the analysis results <br>
+[list playbooks](#action-list-playbooks) - List the playbooks available in the connected Cisco Secure Malware Analytics environment <br>
+[list vms](#action-list-vms) - List the VMs available in the connected Cisco Secure Malware Analytics environment <br>
 [list submissions](#action-list-submissions) - List the submissions present on Cisco Secure Malware Analytics based on the query provided
 
 ## action: 'test connectivity'
 
 Validate the asset configuration for connectivity. This action logs into the device to check the connection and credentials
 
-Type: **test** \
+Type: **test** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -69,7 +69,7 @@ No Output
 
 Run the file in the Cisco Secure Malware Analytics sandbox and retrieve the analysis results
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 This action requires the input file to be present in the vault and therefore takes the vault id as the input parameter.
@@ -405,7 +405,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 Query to retrieve completed tasks in Cisco Secure Malware Analytics
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -739,7 +739,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 Query for results of an already completed task in Cisco Secure Malware Analytics
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -1068,7 +1068,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 Load a URL in the Cisco Secure Malware Analytics sandbox and retrieve the analysis results
 
-Type: **generic** \
+Type: **generic** <br>
 Read only: **False**
 
 #### Action Parameters
@@ -1400,7 +1400,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 List the playbooks available in the connected Cisco Secure Malware Analytics environment
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -1424,7 +1424,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 List the VMs available in the connected Cisco Secure Malware Analytics environment
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 #### Action Parameters
@@ -1449,7 +1449,7 @@ summary.total_objects_successful | numeric | | 1 |
 
 List the submissions present on Cisco Secure Malware Analytics based on the query provided
 
-Type: **investigate** \
+Type: **investigate** <br>
 Read only: **True**
 
 ThreadGrid API returns a maximum of 10,000 results. Even if more than 10,000 results are present on the ThreadGrid server, a larger value for the 'limit' parameter will not return all of them.
