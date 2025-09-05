@@ -1,7 +1,7 @@
 # Cisco Secure Malware Analytics
 
 Publisher: Splunk <br>
-Connector Version: 2.4.3 <br>
+Connector Version: 2.4.4 <br>
 Product Vendor: Cisco <br>
 Product Name: Cisco Secure Malware Analytics <br>
 Minimum Product Version: 6.2.1
