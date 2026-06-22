@@ -4,7 +4,7 @@ Publisher: Splunk <br>
 Connector Version: 2.4.4 <br>
 Product Vendor: Cisco <br>
 Product Name: Cisco Secure Malware Analytics <br>
-Minimum Product Version: 6.2.1
+Minimum Product Version: 8.6.0
 
 This app supports executing investigative actions to analyze executables and URLs on the Cisco Secure Malware Analytics sandbox
 
