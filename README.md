@@ -85,7 +85,7 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 **force_analysis** | optional | Force re-run of sample | boolean | |
 **private** | optional | Mark file and results private (This parameter is ignored if the asset setting is checked) | boolean | |
 **playbook** | optional | Cisco Secure Malware Analytics playbook to run on the submitted file | string | `threatgrid playbook name` |
-**sample_password** | optional | Password used to open the submitted file | string | `password` |
+**sample_password** | optional | Password used to open the submitted file | password | `password` |
 **tags** | optional | A comma-separated list of tags applied to this sample | string | |
 **vm_runtime** | optional | The number of minutes the sample should be analyzed for (Must be set to either 2 or 5) | numeric | |
 
@@ -99,7 +99,7 @@ action_result.parameter.run_async | boolean | | False True |
 action_result.parameter.force_analysis | boolean | | False True |
 action_result.parameter.playbook | string | `threatgrid playbook name` | press_enter |
 action_result.parameter.private | boolean | | False True |
-action_result.parameter.sample_password | string | `password` | T3stP@$$ |
+action_result.parameter.sample_password | password | `password` | T3stP@$$ |
 action_result.parameter.tags | string | | test-tag1, test-tag2 |
 action_result.parameter.vault_id | string | `vault id` `pe file` `pdf` `sha1` | 03bc73261e9700198d996582ba43a641be831cb4 |
 action_result.parameter.vm | string | `threatgrid vm name` | win10-x64-browser |
