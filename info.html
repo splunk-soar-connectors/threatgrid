@@ -92,7 +92,7 @@ without a valid written license from Splunk Inc. is PROHIBITED.
                 <td>ID &nbsp; &nbsp;</td>
                 <td>
                   <a href="javascript:;"
-                     onclick="context_menu(this, [{'contains': ['md5', 'threatgrid task id'], 'value':'{{ item.status.id }}' }], 0, {{ container.id }}, null, false);">
+                     onclick="context_menu(this, [{'contains': ['md5', 'threatgrid task id'], 'value':'{{ item.status.id|escapejs }}' }], 0, {{ container.id }}, null, false);">
                     {{ item.status.id }}
                     &nbsp;
                     <span class="fa fa-caret-down" style="font-size: smaller;"></span>
@@ -128,7 +128,7 @@ without a valid written license from Splunk Inc. is PROHIBITED.
               <td>Target &nbsp; &nbsp;</td>
               <td>
                 <a href="javascript:;"
-                   onclick="context_menu(this, [{'contains': ['file name'], 'value':'{{ item.target }}' }], 0, {{ container.id }}, null, false);">
+                   onclick="context_menu(this, [{'contains': ['file name'], 'value':'{{ item.target|escapejs }}' }], 0, {{ container.id }}, null, false);">
                   {{ item.target }}
                   &nbsp;
                   <span class="fa fa-caret-down" style="font-size: smaller;"></span>
